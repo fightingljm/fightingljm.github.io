@@ -3,13 +3,14 @@
   <head>
     <meta charset='utf-8'>
     <title>Happy JS</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
   </head>
   <body>
     <div id="wrapper">
       {% include header.html %}
       <section class="content clearfix">
         {{ content }}
+        <!-- 被替换为.md的内容 -->
       </section>
       {% include footer.html %}
     </div>
