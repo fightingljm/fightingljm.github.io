@@ -34,8 +34,13 @@ mkdir funnydeer.github.io
 
 ### 第二步：创建 github.com 上的同名仓库
 
-待续...
-
+```
+不要初始化仓库，直接创建
+两种方式创建https和ssh：https每次上传要输入用户名和密码；ssh第一次上传粘贴公钥，之后直接上传。
+公钥在～.ssh里
+门牌号的存放位置
+cat .git/config
+```
 
 ### 添加 ssh key
 

@@ -73,7 +73,7 @@ a { color: #14877E; text-decoration: none; }
 
 .table-of-contents { padding-top: 10px; padding-bottom: 10px; width: 800px; margin: 30px auto 70px; background: #FFF; }
 
-p.part { font-family: "Crete Round", Georgia, Times New Roman, serif; font-size: 20px; text-transform: uppercase; color: #14877E; margin: 20px 0; text-align: center; }
+p.part { font-family: arial,"Crete Round", Georgia, Times New Roman, serif; font-size: 22px; text-transform: uppercase; color: #14877E; margin: 20px 0; text-align: center; }
 
 .index-table { border-collapse: collapse; width: 700px; margin: 0 auto 30px; }
 
@@ -89,7 +89,7 @@ p.part { font-family: "Crete Round", Georgia, Times New Roman, serif; font-size:
 
 .index-table .chapter-title a { display: block; padding: 20px; color: #14877E; text-decoration: none; }
 
-.index-table .chapter-index { text-align: center; width: 100px; }
+.index-table .chapter-index { text-align: center; width: 100px; font-size: 17px;}
 
 .name-card img { width: 60px; display: table-cell; float: left; border-radius: 50%; margin-right: 20px; margin-bottom: 50px; }
 .name-card .text { line-height: 1.8; display: table-cell; font-size: 14px; }
