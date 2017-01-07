@@ -9,9 +9,9 @@ title: 上传代码到 Github.com
 
 如何删除一个 github.com 的仓库呢？
 
-首先到仓库页面：https://github.com/funnydeer/funnydeer.github.io
+首先到仓库页面：https://github.com/happypeter/happypeter.github.io
 
-点 Settings（设置）这一个标签。打开的页面底部有一个 “Delete this repository” 按钮，意思是”删除这个仓库“，点击按钮。打开的界面中，输入一下这个仓库的名字 funnydeer.github.io 就可以把这个仓库删除了。
+点 Settings（设置）这一个标签。打开的页面底部有一个 “Delete this repository” 按钮，意思是”删除这个仓库“，点击按钮。打开的界面中，输入一下这个仓库的名字 happypeter.github.io 就可以把这个仓库删除了。
 
 删除仓库之后，我们要做的事情是：
 
@@ -22,7 +22,7 @@ title: 上传代码到 Github.com
 项目名称是任意的，但是我们这里想做的事情是上传比较，所以，本地这个仓库名，也必须是：
 
 ```
-mkdir funnydeer.github.io
+mkdir happypeter.github.io
 ```
 
 本地项目名要和 github.com 我们一会儿要创建的仓库名保持一致。
@@ -34,26 +34,69 @@ mkdir funnydeer.github.io
 
 ### 第二步：创建 github.com 上的同名仓库
 
+到 github.com 上点 `New repository` 按钮，新建一个项目，
+项目名叫做 `happypeter.github.io` 。
+
+> 注意，不要勾选任何选项，尤其是不能默认创建 README.md 文件。
+
+创建完成之后，页面上有两个选择，其中第二个是
+
 ```
-不要初始化仓库，直接创建
-两种方式创建https和ssh：https每次上传要输入用户名和密码；ssh第一次上传粘贴公钥，之后直接上传。
-公钥在～.ssh里
-门牌号的存放位置
-cat .git/config
+or push an existing repository from the command line
 ```
 
-### 添加 ssh key
+翻译：或者把一个已经存在的仓库从命令行推送上来
 
-为了达成开发机和 github.com 的互信。因为开发过程中，我们需要用本地机器向 github.com 的仓库中
-写东西（ git push ），同时我们又不想每次都输入密码，所以我们就用 ssh key 的形式来达成互信，过程
-如下：
+我们当前就属于这个情况。上传方式有两种 HTTPS 和 SSH ，我们推荐的方式是 SSH，点一下页面上 SSH 字样的按钮。
+
+接下来就按照页面上显示的两步来走。
+
+### 尝试推送 push
+
+到本地命令行，进入我们的本地项目文件夹
+
+```
+cd happypeter.github.io
+```
+
+然后执行下面两步：
+
+```
+git remote add origin git@github.com:funnydeer/funnydeer.github.io.git
+git push -u origin master
+```
+
+如上所示：
+
+```
+git@github.com:funnydeer/funnydeer.github.io.git
+```
+这个是远端仓库地址。第一个命令本身的意思是把远端仓库地址记录到本地仓库中。
+
+下一步 `git push -u origin master` 就是真正进行上传代码的工作了。
+
+但是执行结果是：
+
+```
+Please make sure you have the correct access rights
+```
+
+执行失败，解决方法就是添加 ssh 公钥到 github.com 。
+
+
+### 第三步：添加 ssh key
+
+现在需要达成开发机和 github.com 的互信。
+
+因为开发过程中，我们需要用本地机器向 github.com 的仓库中
+写东西（ git push ），同时我们又不想每次都输入密码，所以我们就用 ssh key 的形式来达成互信，过程如下：
 
 - 在本地机器上生成一对 ssh key ，一个公钥，一个私钥
 - 把公钥添加到 github.com
 
 具体操作如下：
 
-- 首先本地运行 `ssh-keygen` 命令
+- 首先本地运行 `ssh-keygen` 命令，可以在 ~/.ssh 文件夹下生产 ssh key
 - 到 `~/.ssh/id_rsa.pub` 也就是公钥文件中，拷贝公钥字符串
 - 把字符串粘贴到 github.com -> setting -> ssh keys -> add
 
@@ -66,6 +109,11 @@ cat .git/config
 
 大功告成。
 
+### Github Pages 显示网站
+
+上面的步骤操作完成，就可以在 happypeter.github.io 看到网站的首页了。
+当然我们这里依然是使用 Github Pages 服务，所以是可以添加 md 文件的，
+具体的操作方式参考[第一节](https://happypeter.github.io/digicity/linux/1-github-pages.html)。
 
 ### git clone 命令
 
