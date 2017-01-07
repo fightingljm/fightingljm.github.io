@@ -63,6 +63,7 @@ cd happypeter.github.io
 
 ```
 git remote add origin git@github.com:funnydeer/funnydeer.github.io.git
+    - 查看是否成功即门牌号的存放位置:cat .git/config
 git push -u origin master
 ```
 
@@ -108,6 +109,18 @@ Please make sure you have the correct access rights
 ```
 
 大功告成。
+
+
+### 在Coding.net上的不同
+
+- 要新建分支
+
+```
+查看当前分支：git branch
+在本地创建coding-pages新分支：git checkout -b coding-pages
+在远端创建相同分支并把本地分支内容上传：git push -u origin coding-pages
+```
+
 
 ### Github Pages 显示网站
 
