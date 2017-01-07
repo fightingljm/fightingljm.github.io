@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="../css/main.css">
   </head>
   <body>
-    <div id="wrapper">
+    <div id="wrapper" class="book-content">
       {% include header.html %}
-      <section class="content clearfix">
-        {{ content }}
-        <!-- 被替换为.md的内容 -->
+      <section class="content">
+        <div class="book-wrapper">
+          <div class="chapter-contents">
+            <h1>{{ page.title }}</h1>
+            {{ content }}
+          </div>
+        </div>
       </section>
       {% include footer.html %}
     </div>
