@@ -29,8 +29,6 @@ npm -v
 如何使用 npm 初始化一个 node 项目：
 
 - npm init 生成 package.json
-- npm install <package name> --save 安装的包会记录到
-- package.json 的 dependencies
-- npm install <package name> --save-dev 安装的包会记录到
-- package.json 的 devDependencies
+- npm install <package name> --save 安装的包会记录到package.json 的 dependencies
+- npm install <package name> --save-dev 安装的包会记录到package.json 的 devDependencies
 - npm install <package name> -g 安装到我们本地的电脑上
