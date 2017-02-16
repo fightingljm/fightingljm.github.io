@@ -1,5 +1,5 @@
 ---
-title: 初试 webpack
+title: ES6 入门
 ---
 
 webpack ES6语法编译成ES5
