@@ -1,5 +1,5 @@
 ---
-title: 初试 webpack
+title: 初试 webpack 和 Nodejs语法
 ---
 
 nodejs 的模块分为 3 类，核心模块，第三方模块，以及自定义的模块
@@ -38,4 +38,17 @@ module.exports = {
     filename: 'bundle.js'
   }
 }
+```
+
+Nodejs语法 多个js文件打捆导入导出
+
+```
+打捆，执行一条webpack命令
+./node_modules/.bin/webpack index.js build/ljm.js
+
+导出
+module.exports = a;
+
+导入
+var a = require('./demo');
 ```
