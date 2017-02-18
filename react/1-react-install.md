@@ -44,13 +44,13 @@ function (nextElement, container, callback) {
   }
 ```
 
-### JSX 语法,
+### JSX 语法
 
 它允许我们在JS里直接去写标签,他的特点如下
 
 - 每个标签必须关闭;
 - Adjacent JSX elements must be wrapped in an enclosing tag
-           (JSA元素必需被包裹在一个完全封闭的标签内);
+---------------(JSX元素必需被包裹在一个完全封闭的标签内);
 - 注释的写法: {/*我是注释*/}
 - 我们可以在JSX语法内嵌入变量{obj},但是不能嵌入js语句;不支持if语句,但是支持三目运算符
 - class 写为 className , tabindex 写为 tabIndex , for 写为 htmlFor
