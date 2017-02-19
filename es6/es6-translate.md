@@ -9,7 +9,9 @@ ES6语法需要使用babel编译器，到[bable官网](http://babeljs.cn/docs/se
 ```
 $ npm install --save-dev babel-loader
 ```
+
 - 第三步：Usage;
+
 ```js
 module.exports = {
   entry:'./index.js',
@@ -35,10 +37,13 @@ module.exports = {
 > 注意：至今最新版本要把loaders变为rules；把loader变为use；
 
 - 第四步：创建`.babelrc`配置文件，并执行以下命令使配置文件生效
-```
+
+```bash
 $ npm install babel-preset-env --save-dev
 ```
+
 - 第五步：在`.babelrc`添加内容
+
 ```
 {
   "presets": ["env"]
