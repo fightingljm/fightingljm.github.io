@@ -7,7 +7,7 @@ ES6语法需要使用babel编译器，到[bable官网](http://babeljs.cn/docs/se
 - 第一步：点击webpack;
 - 第二步：installation;
 ```
-npm install --save-dev babel-loader
+$ npm install --save-dev babel-loader
 ```
 - 第三步：Usage;
 ```js
@@ -36,7 +36,7 @@ module.exports = {
 
 - 第四步：创建`.babelrc`配置文件，并执行以下命令使配置文件生效
 ```
-npm install babel-preset-env --save-dev
+$ npm install babel-preset-env --save-dev
 ```
 - 第五步：在`.babelrc`添加内容
 ```

@@ -15,7 +15,7 @@ title: 文件操作
 创建文件夹
 
 ```
-mkdir project
+$ mkdir project
 ```
 
 注意：创建的位置要在用户主目录内部，不然会遇到**权限**不够的问题。
@@ -23,7 +23,7 @@ mkdir project
 进入这个项目文件夹
 
 ```
-cd project
+$ cd project
 ```
 
 这样，**当前文件夹** 就切换到了 project 之内。
@@ -34,7 +34,7 @@ cd project
 创建一个文件，可以用
 
 ```
-touch fileName
+$ touch fileName
 ```
 
 注意：Windows 系统上，一般文件都是要有后缀，但是 Linux 下没有这个要求。
@@ -42,7 +42,7 @@ touch fileName
 但是，一般我们都是用 atom 编辑器来创建文件。
 
 ```
-atom .
+$ atom .
 ```
 
 注：`.` 代表当前位置（当前文件夹）。
@@ -52,13 +52,13 @@ atom .
 删除一个文件
 
 ```
-rm fileName
+$ rm fileName
 ```
 
 删除一个文件夹
 
 ```
-rm -r folderName
+$ rm -r folderName
 ```
 
 ### 移动
@@ -111,14 +111,14 @@ aa bb cc
 普通用户就是我们默认登录用户，例如 peter 。超级用户就是管理员。普通用户可以化身超级用户。这个化身的方式是
 
 ```
-sudo rm fileName
+$ sudo rm fileName
 ```
 
 上面的命令可以用超级用户权限来执行一个命令。
 
 
 ```
-sudo su
+$ sudo su
 ```
 
 可以直接化身超级用户。

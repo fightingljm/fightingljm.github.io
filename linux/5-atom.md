@@ -11,8 +11,8 @@ title: Atom 编辑器
 ### 打开一个项目
 
 ```
-cd project/
-atom .
+$ cd project/
+$ atom .
 ```
 
 ### 创建文件

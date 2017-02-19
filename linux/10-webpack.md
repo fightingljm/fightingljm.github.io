@@ -160,16 +160,16 @@ ES6 的各种语法浏览器并不是完全支持，所以如果我们要在项�
 
 首先新建一个项目，并通过 npm init 把它初始化为一个 nodejs 项目
 
-```
-mkdir webpack-es6
-cd webpack-es6
-npm init -y
+```bash
+$ mkdir webpack-es6
+$ cd webpack-es6
+$ npm init -y
 ```
 
 最后一个命令执行完毕，package.json 文件就生成了，可以开始装包了
 
-```
-npm i --save babel-loader babel-core babel-preset-es2015 babel-preset-stage-0
+```bash
+$ npm i --save babel-loader babel-core babel-preset-es2015 babel-preset-stage-0
 ```
 
 上面
@@ -241,9 +241,9 @@ b.doStuff();
 
 现在就来运行命令进行编译
 
-```
-cd webpack-es6
-webpack
+```bash
+$ cd webpack-es6
+$ webpack
 ```
 
 执行 webpack 命令的时候，默认就会去加载当前位置的 webpack.config.js 中的配置内容， 于是 Webpack 就可以找到配置文件中指明的 Entry （入口文件），通过 babel-loader 来把入口文件 中的 ES6 的内容编译成 ES5 ，并且输出到出口文件 Output ，也就是 dist 文件夹之内的 bundle.js 文件。
@@ -311,8 +311,8 @@ webpack.config.js 跟上集中一样。
 
 先来装包：
 
-```
-npm install –save react react-dom
+```bash
+$ npm install –save react react-dom
 ```
 
 上面 `react` 这个包用来提供 React 的核心功能，react-dom 来帮助我们把 React 组件显示（术语也叫”渲染“ 英文叫 render ）到浏览器之上。
@@ -350,9 +350,9 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 运行
 
-```
-cd webpack-es6
-webpack
+```bash
+$ cd webpack-es6
+$ webpack
 ```
 
 进行项目编译，但是报错了：
@@ -376,8 +376,8 @@ Module build failed: SyntaxError: Unexpected token (5:16)
 
 第一步，装包
 
-```
-npm i --save babel-preset-react
+```bash
+$ npm i --save babel-preset-react
 ```
 
 第二步，修改 .babelrc 文件，为
@@ -390,7 +390,7 @@ npm i --save babel-preset-react
 
 使用 server
 
-```
+```bash
 Download the React DevTools and use an HTTP server (instead of a file: URL) for a better development experience: https://fb.me/react-devtools
 ```
 

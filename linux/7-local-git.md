@@ -20,7 +20,7 @@ Git **本地工作流**（没有网络操作）可以分为以下几步：
 首先，我们先来创建一个项目：
 
 ```
-mkdir trygit
+$ mkdir trygit
 ```
 
 
@@ -28,8 +28,8 @@ mkdir trygit
 
 
 ```
-cd trygit
-atom .
+$ cd trygit
+$ atom .
 ```
 
 现在我们来把一个**普通项目**变成一个**仓库** ，需要执行
@@ -47,7 +47,7 @@ init 是英文 initialization （初始化）的缩写。
 运行这个命令之后，如果我们敲
 
 ```
-ls
+$ ls
 ```
 
 会看到没有任何变化。因为，命令创建的 `.git` 文件夹是一个隐藏文件夹（所有以点开头的文件或者文件夹在 Linux 系统下都是隐藏的）。
@@ -55,7 +55,7 @@ ls
 要查看隐藏文件夹，可以敲
 
 ```
-ls -a
+$ ls -a
 ```
 
 这样可以看到输出中包含 `.git` 文件夹了。
@@ -73,7 +73,7 @@ ls -a
 首先来添加修改到 git ：
 
 ```
-git add -A
+$ git add -A
 ```
 
 注： -A 的意思是添加“所有当前修改内容”
@@ -82,7 +82,7 @@ git add -A
 
 
 ```
-git commit -m"I add a file"
+$ git commit -m"I add a file"
 ```
 
 注： `commit` 的意思是”做一件很重要的事”，但是在 git 这里，它的意思就是**版本** 。`-m` 就是 message 的简写，后面的内容是**再版留言** 。
@@ -96,8 +96,8 @@ please tell me who you are
 解决方法是，运行下面的命令
 
 ```
-git config --global user.name  "Peter Wang"
-git config --global user.email  "happypeter1983@gmail.com"
+$ git config --global user.name  "Peter Wang"
+$ git config --global user.email  "happypeter1983@gmail.com"
 ```
 
 来设置用户名和邮箱。
@@ -105,9 +105,9 @@ git config --global user.email  "happypeter1983@gmail.com"
 在 家里有一个.gitconfig隐藏文件，有刚刚键入的用户名和邮箱，可以用atom打开查看和修改
 
 ```
-cd ~
-ls -a
-atom .gitconfig
+$ cd ~
+$ ls -a
+$ atom .gitconfig
 ```
 文件中内容如下，可以进行修改
 
@@ -146,7 +146,7 @@ $ git commit -m"I add a file"
 那么如何来查看改版历史呢？
 
 ```
-git log -p
+$ git log -p
 ```
 
 `log` 是日志的意思。`-p` 是 patch （补丁，也就是修改内容）的缩写。

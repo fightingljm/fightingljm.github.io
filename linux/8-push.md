@@ -22,7 +22,7 @@ title: 上传代码到 Github.com
 项目名称是任意的，但是我们这里想做的事情是上传比较，所以，本地这个仓库名，也必须是：
 
 ```
-mkdir happypeter.github.io
+$ mkdir happypeter.github.io
 ```
 
 本地项目名要和 github.com 我们一会儿要创建的仓库名保持一致。
@@ -56,15 +56,15 @@ or push an existing repository from the command line
 到本地命令行，进入我们的本地项目文件夹
 
 ```
-cd happypeter.github.io
+$ cd happypeter.github.io
 ```
 
 然后执行下面两步：
 
 ```
-git remote add origin git@github.com:funnydeer/funnydeer.github.io.git
+$ git remote add origin git@github.com:funnydeer/funnydeer.github.io.git
     - 查看是否成功即门牌号的存放位置:cat .git/config
-git push -u origin master
+$ git push -u origin master
 ```
 
 如上所示：
@@ -135,7 +135,7 @@ Please make sure you have the correct access rights
 基本上会选择另外一种方式，就是 clone 。
 
 ```
-git clone git@github.com:happypeter/digicity.git
+$ git clone git@github.com:happypeter/digicity.git
 ```
 
 clone 的特点就是不仅仅可以得到最新代码，而且可以得到整个改版历史。而普通下载只能得到最新版本。

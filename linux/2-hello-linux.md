@@ -26,7 +26,7 @@ Ctrl-Alt-T 是**深度 Linux** 系统上打开命令行窗口的快捷键。这�
 命令行窗口中可以运行的程序不唯一。默认启动的程序叫做 Bash ，这个是我们这个要学习的核心。在 Bash 下就可以来输入各种 Linux 命令了。例如，可以敲
 
 ```
-ls
+$ ls
 ```
 
 来列出当前位置都有哪些文件。
@@ -58,8 +58,8 @@ Bash 的常用命令：
 
 
 ```
-cd Desktop
-mkdir FolderName
+$ cd Desktop
+$ mkdir FolderName
 ```
 
 - 上面 `cd Desktop` 改变当前位置到桌面。

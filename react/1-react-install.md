@@ -7,8 +7,8 @@ title:  react 安装及简单使用
 首先需要webpack和node环境
 
 ```
-npm install react react-dom --save
-npm install --save-dev babel-preset-react
+$ npm install react react-dom --save
+$ npm install --save-dev babel-preset-react
 ```
 
 ### 使用
@@ -158,6 +158,8 @@ ReactDOM.render(
   <Header></Header> ,document.getElementById('app')
 )
 ```
+
+**组件化嵌入式开发**
 
 用组件化实现一个网页的头部 Banner 和 Footer:
 
@@ -398,10 +400,10 @@ module.exports = {
         exclude: /node_modules/,//排除node_modules文件夹
         use: "babel-loader"
       },
-  +    {
-  +      test: /\.css$/,
-  +      use: ['style-loader','css-loader']
-  +    }
++     {
++       test: /\.css$/,
++       use: ['style-loader','css-loader']
++     }
     ]
   }
 }
@@ -422,14 +424,14 @@ body{
 再看导入到 index.js 时,直接导入文件就可以
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+  import React from 'react';
+  import ReactDOM from 'react-dom';
 
-import App from './App';
-import './main.css'  //没有装包会报错:You may need an appropriate loader to handle this file type.
-ReactDOM.render(
-  <App/> ,document.getElementById('app')
-)
+  import App from './App';
++ import './main.css'  //没有装包会报错:You may need an appropriate loader to handle this file type.
+  ReactDOM.render(
+    <App/> ,document.getElementById('app')
+  )
 ```
 这样就完成了css文件的外链
 
@@ -439,7 +441,7 @@ ReactDOM.render(
 
 同样,首先装包
 ```
-npm install --save-dev file-loader
+$ npm install --save-dev file-loader
 ```
 修改webpack.config.js
 ```js
@@ -447,7 +449,8 @@ module.exports = {
   entry:'./src/index.js',
   output:{
     path:'build',
-    filename:'bundel.js'
+    filename:'bundel.js',
++    publicPath:'build/'
   },
   devtool:'eval',//报错到源代码
   module: {
@@ -461,11 +464,52 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader','css-loader']
       },//css文件的加载,解析文件样式
-  +    {
-  +      test: /\.(jpe?g|png)$/,
-  +      use: 'file-loader'
-  +    }//图片加载
++     {
++       test: /\.(jpe?g|png)$/,
++       use: 'file-loader'
++     }//图片加载
     ]
   }
 }
+```
+### resolve解析
+
+resolve下常用的是extension和alias字段的配置：
+
+extension 不用在require或是import的时候加文件后缀
+```js
+// webpack.config.js
+module.exports = {
+  entry:'./src/index.js',
+  output:{
+    path:'build',
+    filename:'bundel.js',
+    publicPath:'build/'
+  },
+  devtool:'eval',//报错到源代码
++ resolve: {
++   extensions: [".js", ".jsx",".css",".jpg"],
++ },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,//排除node_modules文件夹
+        use: "babel-loader"
+      },//js文件用babel加载
+      {
+        test: /\.css$/,
+        use: ['style-loader','css-loader']
+      },//css文件的加载,解析文件样式
+      {
+        test: /\.(jpe?g|png)$/,
+        use: 'file-loader'
+      }//图片加载
+    ]
+  }
+}
+```
+```js
+- var component = require('./component.js');
++ var component = require('./component');
 ```
