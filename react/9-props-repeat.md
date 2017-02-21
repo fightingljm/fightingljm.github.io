@@ -132,6 +132,7 @@ export default App;
 ```
 
 - demo 2:简单的 Card 复用
+
 ```js
 //Card.js
 import React from 'react';
