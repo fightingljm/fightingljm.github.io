@@ -189,6 +189,8 @@ ReactDOM.render(
 
 - demo 3:[阮一峰transition](http://www.ruanyifeng.com/home.html)
 
+分析:两个状态--点击按钮 top 和 height 发生变化
+
 ```js
 //RuanyfTrans.js
 import React from 'react';
