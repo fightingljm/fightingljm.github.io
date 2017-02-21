@@ -187,7 +187,7 @@ ReactDOM.render(
 )
 ```
 
-- demo 3:阮一峰transition
+- demo 3:[阮一峰transition](http://www.ruanyifeng.com/home.html)
 
 ```js
 //RuanyfTrans.js
@@ -203,14 +203,91 @@ class RuanyfTrans extends React.Component {
     this.setState({start:!this.state.show})
   }
   render(){
+    //两个状态
+    let style  = {
+      top :this.state.show ? '35%' : '10%',
+      height :this.state.show ? '30vh' : '4.5vh',
+      overflow :this.state.show ? 'auto' : 'hidden'
+    }
     return(
-      <div>
+      <div className='container' style= {style}>
         <button onClick={this.handleClick.bind(this)}>{this.state.show ? '上' : '下'}</button>
+        <br/>
+        <p>Jinmeng Liu 的个人网站<br/><a href='https://fightingljm.github.io'>https://fightingljm.github.io</a></p>
+        <hr/>
+        <p className='select'> >> <a href='#'>Blog</a> / <a href='#'>Tweets</a> / <a href='#'>About</a></p>
+        <hr/>
+        <p>博客标题</p>
       </div>
     )
   }
 }
 export default RuanyfTrans;
+
+
+//同时修改 index.js 为
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import RuanyfTrans from './RuanyfTrans';
+
+ReactDOM.render(
+  <RuanyfTrans/> ,document.getElementById('app')
+)
 ```
 ```css
+/*main.css*/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+}
+html,body{
+  height: 100%;
+}
+body{
+  position: relative;
+  background-image: url('http://www.ruanyifeng.com/images_pub/pub_292.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.container{
+  position: absolute;
+  width: 35%;
+  height: 30vh;
+  top: 35%;
+  left: 45%;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  margin-left: -15%;
+  text-align: center;
+  transition:all 1s ease;
+}
+.select{
+  margin: 1em 0.8em;
+  line-height: 180%;
+  background-color: rgba(0,0,0,0.5);
+  padding: 0.25rem;
+  border-radius: 0.5em;
+  text-shadow: 0 1px 1px #333;
+  color: #fefefe;
+}
+.select a{
+  color: #fefefe;
+}
+.select:hover{
+  background-color: #fefefe;
+  color: #222;
+}
+.select:hover a{
+  color: #222;
+}
+.select a:hover{
+  text-decoration: underline;
+}
+
 ```
