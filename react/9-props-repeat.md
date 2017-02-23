@@ -27,7 +27,7 @@ title:  Props 组件的复用
     add: React.PropTypes.func.isRequired
   };
 ```
-['string'更多类型参考](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+React.PropTypes.[更多类型参考](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
 
 - 复合组件
 

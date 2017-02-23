@@ -394,4 +394,81 @@ $ npm i --save babel-preset-react
 Download the React DevTools and use an HTTP server (instead of a file: URL) for a better development experience: https://fb.me/react-devtools
 ```
 
-之后介绍 webpack-dev-server
+### webpack-dev-server
+
+webpack-dev-server是一个小型的node.js Express服务器,它使用webpack-dev-middleware中间件来为通过webpack打包生成的资源文件提供Web服务。它还有一个通过Socket.IO连接着webpack-dev-server服务器的小型运行时程序。webpack-dev-server发送关于编译状态的消息到客户端，客户端根据消息作出响应。
+
+下面使用webpack-dev-server来起一个本地服务进行调试,这里任然用的是项目内部的webpack-dev-server
+
+第一步:安装
+
+```
+$ npm i -D webpack-dev-server
+```
+
+第二步:添加配置文件 webpack.dev.config.js
+
+```js
+module.exports = {
+  entry:'./src/index.js',
+  output:{
++   path:'/build/',
+    filename:'bundel.js',
++   publicPath:'/build/'
+  },
+  devtool:'eval',//报错到源代码
++ devServer: {
++   port: 8080,
++   inline: true
++ },
+  resolve: {
+    extensions: [".js", ".jsx",".css",".jpg"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,//排除node_modules文件夹
+        use: "babel-loader"
+      },//js文件用babel加载
+      {
+        test: /\.css$/,
+        use: ['style-loader','css-loader']
+      },//css文件的加载,解析文件样式
+      {
+        test: /\.(jpe?g|png)$/,
+        use: 'file-loader'
+      }//图片加载
+    ]
+  }
+}
+```
+
+第三步:修改 package.json
+
+```json
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/webpack --watch",
++   "dev": "./node_modules/.bin/webpack-dev-server --config webpack.dev.config.js --hot --inline"
+  }
+```
+
+第四步:修改我们的 index.html 代码
+
+```html
+<script src="/build/bundel.js"></script>
+```
+
+打开 `localhost:8080` ，回车即可。
+
+那么执行 webpack-dev-server 后面的几个参数是什么意思呢？
+
+- `webpack-dev-server` - 在 localhost:8080 建立一个 Web 服务器
+- `webpack-dev-server --devtool eval` - 为你的代码创建源地址。当有任何报错的时候可以让你更加精确地定位到文件和行号
+- `webpack-dev-server --progress` - 显示合并代码进度
+- `webpack-dev-server --colors` - 命令行中显示颜色
+- `webpack-dev-server --content-base build` - webpack-dev-server服务会默认以当前目录伺服文件，如果设置了content-base的话，服务的根路径则为build目录
+- `webpack-dev-server --inline` 可以自动加上dev-server的管理代码，实现热更新
+- `webpack-dev-server --hot` 开启代码热替换，可以加上HotModuleReplacementPlugin
+- `webpack-dev-server --port 3000` 设置服务端口
