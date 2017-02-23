@@ -2,9 +2,32 @@
 title:  Props 组件的复用
 ---
 
-- props的作用
+- props 的作用
 
 　组件中的props是一种父级向子级传递数据的方式.
+
+- props 的特点
+
+```
+1 只能从父组件传给子组件;
+2 子组件通过 {this.props.[name]} 获取 props 的值;
+3 子组件设置默认属性
+  Btn.defaultProps = {
+    title:'Default',
+    col: '#333',
+    bgc: '#fff',
+    bdc: '#ccc'
+  };
+4 子组件设置属性格式验证
+  Btn.propTypes = {
+    title:React.PropTypes.[string],
+    col: React.PropTypes.[string],
+    bgc: React.PropTypes.[string],
+    bdc: React.PropTypes.[string],
+    add: React.PropTypes.func.isRequired
+  };
+```
+['string'更多类型参考](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
 
 - 复合组件
 
@@ -71,6 +94,7 @@ class Btn extends React.Component {
     )
   }
 }
+//当我们未传入时,用以下方式设置默认的Btn
 Btn.defaultProps={
   title:'Default',
   col:'#333',
@@ -78,7 +102,13 @@ Btn.defaultProps={
   bdc:'#ccc'
 }
 export default Btn;
-
+//当我们传入错误的,以下方式会报一条警告
+Btn.propTypes={
+  title:React.PropTypes.string,
+  col:React.PropTypes.string,
+  bgc:React.PropTypes.string,
+  bdc:React.PropTypes.string
+}
 
 //App.js
 import React from 'react';
@@ -93,6 +123,8 @@ class App extends React.Component {
         <Btn title='Info' col='#fff' bgc='#5bc0de' bdc='#46b8da'/>
         <Btn title='Warning' col='#fff' bgc='#f0ad4e' bdc='#eea236'/>
         <Btn title='Danger' col='#fff' bgc='#d9534f' bdc='#d43f3a'/>
+        <Btn title='Danger' col='#fff' bgc={d9534f} bdc='#d43f3a'/>
+        {/*以上写法会报一条警告,因为 Btn.js 里边的 `add: React.PropTypes.func.isRequired`*/}
       </div>
     )
   }
@@ -128,6 +160,79 @@ export default App;
   border: 1px solid transparent;
   border-radius: 4px;
   font-family: inherit;
+}
+```
+
+*通过 Btn 的例子描述一下 props 父级向子级传递函数的方式*
+
+```js
+//Btn.js
+import React from 'react';
+import './main.css'
+class Btn extends React.Component {
+  handleClick(){
+    this.props.add(this.props.count)
+  }
+  //handleClick 是点击事件绑定的方法,这个方法用来执行父组件传递过来的 add 方法
+  render(){
+    let styles = {
+      color: this.props.col,
+      backgroundColor: this.props.bgc,
+      borderColor: this.props.bdc
+    }
+    return(
+      <div>
+        <p>我是子组件的 button</p>
+        <button style={styles} className='btn' onClick={this.handleClick.bind(this)}>{this.props.title}</button>
+      </div>
+    )
+    //以上 button 和 handleClick 等价于
+    //<button style={styles} className='btn' onClick= {()=>this.props.add(this.props.count)}> {this.props.title} </button>
+  }
+}
+Btn.propType = {
+  title:'Default',
+  col: '#333',
+  bgc: '#fff',
+  bdc: '#ccc'
+}
+Btn.propTypes = {
+  title:React.PropTypes.string,
+  col: React.PropTypes.string,
+  bgc: React.PropTypes.string,
+  bdc: React.PropTypes.string,
+  add: React.PropTypes.func.isRequired
+}
+export default Btn;
+
+
+//App.js
+import React from 'react';
+import Btn from './Btn';
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state={
+      num:0
+    }
+  }
+  addNum(val){
+    this.setState({num:this.state.num+val})
+  }
+  render(){
+    <div>
+      <Btn bgc='#f0ad4e'/>
+      {/*以上写法会报一条警告,因为 Btn.js 里边的 `add: React.PropTypes.func.isRequired`*/}
+
+      数字是: {this.state.num}<br/>
+      <Btn bgc='#5bc0de' add={this.addNum.bind(this)}/>
+      {/*父组件给子组件传递一个 add 方法,这个 add 方法来自父组件的 addNum 方法*/}
+
+      <Btn bgc='#f0ad4e' add={this.addNum.bind(this)} count={5} title='+5'/>
+      <Btn bgc='#f0ad4e' add={this.addNum.bind(this)} count={-10} title='-10'/>
+    </div>
+  }
 }
 ```
 
@@ -183,13 +288,15 @@ class App extends React.Component {
       <Card index='' title='' date=''/>
       <Card index='' title='' date=''/>
       <Card index='' title='' date=''/>*/}
-        {this.state.styles.map(item => <card title={item.title} index={item.index} date={item.date} key={Math.random()}/>)}
+        {
+          this.state.styles.map(item => <card title={item.title} index={item.index} date={item.date} key={Math.random()}/>)
+        }
       </div>
     )
   }
 }
 export default App;
-
+//以上 `title={item.title} index={item.index} date={item.date}` 等价于 `{...item}`
 ```
 
 ```css
