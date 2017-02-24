@@ -468,7 +468,7 @@ module.exports = {
 - `webpack-dev-server --devtool eval` - 为你的代码创建源地址。当有任何报错的时候可以让你更加精确地定位到文件和行号
 - `webpack-dev-server --progress` - 显示合并代码进度
 - `webpack-dev-server --colors` - 命令行中显示颜色
-- `webpack-dev-server --content-base build` - webpack-dev-server服务会默认以当前目录伺服文件，如果设置了content-base的话，服务的根路径则为build目录
-- `webpack-dev-server --inline` 可以自动加上dev-server的管理代码，实现热更新
-- `webpack-dev-server --hot` 开启代码热替换，可以加上HotModuleReplacementPlugin
+- `webpack-dev-server --content-base build` - webpack-dev-server服务会默认以当前目录伺服文件，如果设置了 content-base 的话，服务的根路径则为 build 目录
+- `webpack-dev-server --inline` 可以自动加上 dev-server 的管理代码，实现热更新
+- `webpack-dev-server --hot` 开启代码热替换，可以加上 HotModuleReplacementPlugin
 - `webpack-dev-server --port 3000` 设置服务端口
