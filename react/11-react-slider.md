@@ -1,5 +1,5 @@
 ---
-title:  React 轮播图
+title: React 轮播图
 ---
 
 ```js
