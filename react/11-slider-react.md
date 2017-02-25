@@ -51,24 +51,24 @@ class Slider extends React.Component {
     return this.setState({nowScroll:next})//正常轮播
   }
 
-  - //左右的点击事件
-  - handleClick(which){
-  -   //this.setState({nowScroll:this.state.nowScroll+num})
-  -   //先清掉定时器=>然后执行 scroll() => 最后打开定时器
-  -   clearInterval(this.interval)
-  -   this.scroll(which)
-  -   this.goPlay()
-  - }
-  - //一排按钮点击事件
-  - handleDotted(index){
-  -   // console.log(index);
-  -   //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
-  -   //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
-  -   let n = index-this.state.nowScroll;
-  -   clearInterval(this.interval)
-  -   this.scroll(n)
-  -   this.goPlay()
-  - }
+   //左右的点击事件
+   handleClick(which){
+     //this.setState({nowScroll:this.state.nowScroll+num})
+     //先清掉定时器=>然后执行 scroll() => 最后打开定时器
+     clearInterval(this.interval)
+     this.scroll(which)
+     this.goPlay()
+   }
+   //一排按钮点击事件
+   handleDotted(index){
+     // console.log(index);
+     //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
+     //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
+     let n = index-this.state.nowScroll;
+     clearInterval(this.interval)
+     this.scroll(n)
+     this.goPlay()
+   }
 
   handleClick(index){
     let n = index-this.state.nowScroll;
@@ -100,7 +100,7 @@ class Slider extends React.Component {
           {/* url(${item})要用反引号引起来 */}
         </ul>
         {/* 左右按钮 ,以下传参只需要传入1或者-1,但因为之后有了代码的优化,
-          为了左右点击和一排按钮的点击使用同一个 handleClick() 方法,传入了类似`this.state.nowScroll-1`的参数,
+          为了左右点击和一排按钮的点击使用同一个 handleClick() 方法,传入了类似 this.state.nowScroll-1 的参数,
           这样在使用左右点击是即相当于传入了1或者-1,而使用一排按钮点击时则传入了index*/}
         <button className='arrow left' onClick={this.handleClick.bind(this,this.state.nowScroll-1)}> &lt; </button>
         <button className='arrow right' onClick={this.handleClick.bind(this,this.state.nowScroll+1)}> &gt; </button>
