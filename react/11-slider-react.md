@@ -1,177 +1,295 @@
 ---
-title:  React 轮播图
+title:  State 小例子
 ---
 
-### index.js
+- demo 1:
 
-```
-//index.js
+```js
+//App.js
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Slider from './Slider'
-import './main.css';
-import Img1 from '../images/1.jpg'
-import Img2 from '../images/2.jpg'
-import Img3 from '../images/3.jpg'
-import Img4 from '../images/4.jpg'
-let imgs = [Img1,Img2,Img3,Img4]
-ReactDOM.render(
-  <div>
-    <Slider imgs={imgs}/>
-  </div>
-  ,document.getElementById('app')
-)
-
-
-//Slider.js
-import React from 'react';
-class Slider extends React.Component {
+let date = ['这是第一条消息','这是第二条消息','这是第三条消息','hello world']
+class App extends React.Component {
   constructor() {
     super();
-    this.state={
-      nowScroll:0 // 0 是第一张
+    this.state = {
+      text : date
     }
   }
-  scroll(num){
-    let next = this.state.nowScroll+num;
-    if(next>=this.props.imgs.length){
-      return this.setState({nowScroll:0})
-    }//从右没有图片时到左边第一张
-    if(next<0){
-      return this.setState({nowScroll:this.props.imgs.length-1})
-    }//从左没有图片时到右边第四张
-    return this.setState({nowScroll:next})//正常轮播
-  }
-  // //左右的点击事件
-  // handleClick(which){
-  //   //this.setState({nowScroll:this.state.nowScroll+num})
-  //   //先清掉定时器=>然后执行 scroll() => 最后打开定时器
-  //   clearInterval(this.interval)
-  //   this.scroll(which)
-  //   this.goPlay()
-  // }
-  // //一排按钮点击事件
-  // handleDotted(index){
-  //   // console.log(index);
-  //   //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
-  //   //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
-  //   let n = index-this.state.nowScroll;
-  //   clearInterval(this.interval)
-  //   this.scroll(n)
-  //   this.goPlay()
-  // }
-  handleClick(index){
-    let n = index-this.state.nowScroll;
-    clearInterval(this.interval)
-    this.scroll(n)
-    this.goPlay()
-  }
-  goPlay(){
-    this.interval=setInterval(()=> this.scroll(1),3000)
-  }//轮播定时器
-  componentDidMount(){
-    this.goPlay()
-  }//组件加载完毕 自动轮播
   render(){
-    let liWidth = 100/this.props.imgs.length + '%'
-    let styles = {
-      ul:{
-        width:this.props.imgs.length*100 + '%',
-        left:-this.state.nowScroll*100 + '%'
-      }
-    }
+    // console.log(this.state.text);
+    // let content = this.state.text.map( item => <p>今天的消息是:{item}</p>)
+    let content = this.state.text.map( item => <div key = {Math.random()}>
+      <p>今天的消息是:{item}</p><button>删除</button>
+    </div>)
+    // ` key = {Math.random()}`防止警告,加载最外层的标签上(这是React底层用到的,为了做底层计算的)
     return(
-      <div className='slider-wrap'>{/* 视窗 */}
-        <ul style = {styles.ul}>{/* 超级大盒子 */}
-          {
-            this.props.imgs.map(item => <li key={Math.random()}
-              style={{width:liWidth,backgroundImage:`url(${item})`}}></li>)
-          }
-        </ul>
-        {/* 左右按钮 ,以下传参只需要传入1或者-1,但因为之后有了代码的优化,
-          为了左右点击和一排按钮的点击使用同一个 handleClick() 方法,传入了类似`this.state.nowScroll-1`的参数,
-          这样在使用左右点击是即相当于传入了1或者-1,而使用一排按钮点击时则传入了index*/}
-        <button className='arrow left' onClick={this.handleClick.bind(this,this.state.nowScroll-1)}> &lt; </button>
-        <button className='arrow right' onClick={this.handleClick.bind(this,this.state.nowScroll+1)}> &gt; </button>
-        {/* 一排按钮 */}
-        <div className='dotted'>
-          {
-            this.props.imgs.map((item,index) => <span key={Math.random()}
-              onClick={this.handleClick.bind(this,index)}
-              style={{backgroundColor:this.state.nowScroll==index ? '#000' : '#888'}}
-              ></span>)
-          }
-        </div>
+      <div>
+        {/*{date} 因为 React 的行为,会遍历数组,以上写 content 的意思是让文本返回标签*/}
+        {content}
       </div>
     )
   }
 }
-export default Slider;
+export default App;
 ```
 
-### 最后导入 css 即可
+- demo 2:选项卡
+
+```js
+//Selectbar.js
+import React from 'react';
+
+import Box1 from './Box1'
+import Box2 from './Box2'
+import Box3 from './Box3'
+
+class Selectbar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      show : 0
+    }
+  }
+}
+handleClick(num){
+  this.setState({show:num})
+}
+render(){
+  let styles = {width:'200px', border:'1px solid #ccc', backgroundColor: this.state.show===0 ? '#ccc' : this.state.show===1 ? 'red' : 'yellow'}
+  //0,1,2 是给handleClick 函数传递的参数,用来修改 state
+  return(
+    <div>
+      <button onClick={this.handleClick.bind(this,0)}>Select 1</button>
+      <button onClick={this.handleClick.bind(this,1)}>Select 2</button>
+      <button onClick={this.handleClick.bind(this,2)}>Select 3</button>
+      <div style = {styles}>
+        {
+          this.state.show===0 ? <Box1/> :
+          this.state.show===1 ? <Box2/> : <Box3/>
+        }
+      </div>
+    </div>
+  )
+}
+export default Selectbar;
+
+
+//Box1.js
+import React from 'react';
+class Box1 extends React.Component {
+  render() {
+    return(
+      <div>
+        <p>商品名称: pro</p>
+        <p>商品名称: pro</p>
+        <p>商品名称: pro</p>
+      </div>
+    )
+  }
+}
+export default Box1;
+
+//Box2.js
+import React from 'react'
+class Box2 extends React.Component {
+  render() {
+    return(
+      <div>
+        <p>商品名称: iphone</p>
+        <p>商品名称: iphone</p>
+        <p>商品名称: iphone</p>
+      </div>
+    )
+  }
+}
+export default Box2;
+
+//Box3.js
+import React from 'react'
+class Box3 extends React.Component {
+  render() {
+    return(
+      <div>
+        <p>商品名称: Mac</p>
+        <p>商品名称: Mac</p>
+        <p>商品名称: Mac</p>
+      </div>
+    )
+  }
+}
+export default Box3;
+
+//同时修改 index.js 为
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Selectbar from './Selectbar';
+
+ReactDOM.render(
+  <Selectbar/> ,document.getElementById('app')
+)
 
 ```
+
+- demo 3: 计时器随机选择
+
+```js
+//Eatwhat.js
+import React from 'react'
+let date = ['牛奶','蛋挞','豆干','胡萝卜','青菜','','']
+class Eatwhat {
+  constructor() {
+    super();
+    this.state = {
+      start : false,
+      date,
+      text : ''
+    }
+  }
+  select(){
+    let result = this.state.date[Math.floor(Math.random()*this.state.date.length)];
+    this.setState({text:result})
+  }
+  handleClick(){
+    // this.setState({start:!this.state.start})
+    if(this.state.start){
+      //clearInterval
+      //false
+      clearInterval(this.interval)
+      this.setState({start:false})
+    }else{
+      //计时器
+      //true
+      this.interval=setInterval(()=>this.select(), 100);
+      this.setState({start:true})
+    }
+  }
+  render(){
+    return(
+      <div>
+        <p>今天吃什么:{this.state.text}</p>
+        <button onClick={this.handleClick.bind(this)}>{this.state.start ? '停止' : '开始'}</button>
+      </div>
+    )
+  }
+}
+export default Eatwhat;
+
+
+//同时修改 index.js 为
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Eatwhat from './Eatwhat';
+
+ReactDOM.render(
+  <Eatwhat/> ,document.getElementById('app')
+)
+```
+
+- demo 3:[阮一峰transition](http://www.ruanyifeng.com/home.html)
+
+分析:两个状态--点击按钮 top 和 height 发生变化
+
+```js
+//RuanyfTrans.js
+import React from 'react';
+class RuanyfTrans extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      show:true
+    }
+  }
+  handleClick(){
+    this.setState({start:!this.state.show})
+  }
+  render(){
+    //两个状态
+    let style  = {
+      top :this.state.show ? '35%' : '10%',
+      height :this.state.show ? '30vh' : '4.5vh',
+      overflow :this.state.show ? 'auto' : 'hidden'
+    }
+    return(
+      <div className='container' style= {style}>
+        <button onClick={this.handleClick.bind(this)}>{this.state.show ? '上' : '下'}</button>
+        <br/>
+        <p>Jinmeng Liu 的个人网站<br/><a href='https://fightingljm.github.io'>https://fightingljm.github.io</a></p>
+        <hr/>
+        <p className='select'> >> <a href='#'>Blog</a> / <a href='#'>Tweets</a> / <a href='#'>About</a></p>
+        <hr/>
+        <p>博客标题</p>
+      </div>
+    )
+  }
+}
+export default RuanyfTrans;
+
+
+//同时修改 index.js 为
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import RuanyfTrans from './RuanyfTrans';
+
+ReactDOM.render(
+  <RuanyfTrans/> ,document.getElementById('app')
+)
+```
+```css
+/*main.css*/
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.slider-wrap{
-  width: 100%;
-  height: 50vh;
-  background-color: #ccc;
-  overflow: hidden;
-  position: relative;
+a{
+  text-decoration: none;
 }
-.slider-wrap ul{
-  list-style: none;
+html,body{
   height: 100%;
-  position: relative;
-  transition: left 1s ease;
 }
-.slider-wrap ul li{
-  float: left;
-  height: 100%;
-  -webkit-background-size: cover;
+body{
+  position: relative;
+  background-image: url('http://www.ruanyifeng.com/images_pub/pub_292.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: 50% 50%;
 }
-.arrow{
+.container{
   position: absolute;
-  width: 30px;
-  height: 50vh;
-  background-color: rgba(0,0,0,0);
-  line-height: 100%;
-  vertical-align: middle;
-  font-size: 24px;
-  top: 0;
-  border: none;
-  color: #333;
-  font-weight: bolder;
-  outline: none;
-  cursor: pointer;
-}
-.arrow:hover{
-  background-color: rgba(0,0,0,0.5);
-  color: #fff;
-}
-.right{
-  right: 0;
-}
-.dotted{
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
+  width: 35%;
+  height: 30vh;
+  top: 35%;
+  left: 45%;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  margin-left: -15%;
   text-align: center;
+  transition:all 1s ease;
 }
-.dotted span{
-  display: inline-block;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer;
+.select{
+  margin: 1em 0.8em;
+  line-height: 180%;
+  background-color: rgba(0,0,0,0.5);
+  padding: 0.25rem;
+  border-radius: 0.5em;
+  text-shadow: 0 1px 1px #333;
+  color: #fefefe;
+}
+.select a{
+  color: #fefefe;
+}
+.select:hover{
+  background-color: #fefefe;
+  color: #222;
+}
+.select:hover a{
+  color: #222;
+}
+.select a:hover{
+  text-decoration: underline;
 }
 
 ```
