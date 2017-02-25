@@ -114,9 +114,10 @@ class App extends React.Component {
     console.log('111');
   }
   render(){
+    let styles={height:`${this.state.divH}px`,background:'#888'}
     return(
       <div>        
-        <div style={{height:`${this.state.divH}px`,background:'#888'}}
+        <div style={styles}
           onWheel={this.handleWheel.bind(this)}
           onContextMenu={this.handleMenu.bind(this)}></div>
       </div>
