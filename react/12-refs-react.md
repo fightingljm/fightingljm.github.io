@@ -1,9 +1,10 @@
 ---
-title: React refs
+title: Refs
 ---
 
+- [Refs and the DOM](https://facebook.github.io/react/docs/refs-and-the-dom.html)
 
-下载 jquery 包
+首先下载 jquery 包,尝试一下在原生 JS 里拿到一个标签
 
 ```
 $ npm i --save jquery
@@ -38,6 +39,10 @@ class App extends React.Component {
 
     //用 refs 拿到组件 ref 为 aaa 里的 getValue() 方法
     console.log(this.refs.aaa.getValue());
+
+    //ref 通过传入回调函数来执行下面的方法
+    console.log(this.newAttr);
+    this.textInput.focus();
   }
   render(){
     return(
@@ -49,6 +54,11 @@ class App extends React.Component {
         <button id='btn3' onClick={()=>this.refs.aaa.handleClick()}>3</button>
         {/* #btn3 用 refs 拿到组件 ref 为 aaa 里的 handleClick() 方法 */}
         <Test ref='aaa'/>
+        <br/><br/>
+        {/* 官网建议尽量少用 refs ,给 ref 传入一个回调函数是常用的方法 */}
+        <div ref={(ccc) => this.newAttr = ccc}>ccc</div>
+        <input type='text' ref={input => this.textInput = input}/>
+        <button id='btn4' onClick={()=> console.log(this.textInput.value)}>4</button>
       </div>
     )
   }
@@ -75,4 +85,44 @@ class Test extends React.Component {
     )
   }
 }
+```
+
+- [Handling Events](https://facebook.github.io/react/docs/handling-events.html)
+
+这里看几个简单的小李子就好,具体参见官网
+
+```js
+//App.js
+import React from 'react';
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      divH:50
+    }
+  }
+  handleWheel(e){
+    if(this.state.divH<50){
+      this.setState({divH:100})
+    }else{
+      this.setState({divH:this.state.divH+e.deltaY})
+    }
+  }
+  handleMenu(e){
+    e.preventDefault();
+    console.log('111');
+  }
+  render(){
+    return(
+      <div>        
+        <div style={{height:`${this.state.divH}px`,background:'#888'}}
+          onWheel={this.handleWheel.bind(this)}
+          onContextMenu={this.handleMenu.bind(this)}></div>
+      </div>
+    )
+  }
+}
+export default App;
+
 ```

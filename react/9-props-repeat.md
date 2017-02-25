@@ -334,6 +334,76 @@ export default App;
 }
 ```
 
+- demo 3:新建组件中套用N个标签和新组件
+
+```js
+//当 Children 里引入 Son ,Son 里套用 p 标签和 Test 新组件时,应该这样write
+
+//Children.js
+import React from 'react';
+import Son from './Son'
+import Test from './Test'
+class Children extends React.Component {
+  render(){
+    return(
+      <div>
+        Children
+        <Son>
+          <p>123</p>
+          <p>123</p>
+          <Test/>
+          <Test/>
+        </Son>
+      </div>
+    )
+  }
+}
+export default Children;
+
+//Test.js
+import React from 'react';
+class Test extends React.Component {
+  getValue(){
+    return this.refs.input.value
+  }
+  handleClick(){
+    alert('aaa')
+  }
+  render(){
+    return(
+      <div>
+        我是测试组件
+        <input type='text' defaultValue='111' ref='input'/>
+        <button onClick={this.handleClick.bind(this)}>aa</button>
+      </div>
+    )
+  }
+}
+export default Test;
+
+//Son.js
+import React from 'react';
+class Son extends React.Component {
+  constructor() {
+    super();
+    this.state={
+
+    }
+  }
+  render(){
+    console.log(this.props.children);
+    return(
+      <div>
+        Son
+        {this.props.children}
+        {/* 这里是重点 */}
+      </div>
+    )
+  }
+}
+export default Son;
+```
+
 ### React 中 `state` 和 `props` 的区别
 
 **props和state都是用于描述component状态的，并且这个状态应该是与显示相关的**
