@@ -95,8 +95,9 @@ class Slider extends React.Component {
         <ul style = {styles.ul}>{/* 超级大盒子 */}
           {
             this.props.imgs.map(item => <li key={Math.random()}
-              style={{width:liWidth,backgroundImage:`url(${item})`}}></li>)
+              style={{width:liWidth,backgroundImage:url(${item})}}></li>)
           }
+          {/* url(${item})要用反引号引起来 */}
         </ul>
         {/* 左右按钮 ,以下传参只需要传入1或者-1,但因为之后有了代码的优化,
           为了左右点击和一排按钮的点击使用同一个 handleClick() 方法,传入了类似`this.state.nowScroll-1`的参数,
