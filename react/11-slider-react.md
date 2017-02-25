@@ -51,24 +51,24 @@ class Slider extends React.Component {
     return this.setState({nowScroll:next})//正常轮播
   }
 
-  // //左右的点击事件
-  // handleClick(which){
-  //   //this.setState({nowScroll:this.state.nowScroll+num})
-  //   //先清掉定时器=>然后执行 scroll() => 最后打开定时器
-  //   clearInterval(this.interval)
-  //   this.scroll(which)
-  //   this.goPlay()
-  // }
-  // //一排按钮点击事件
-  // handleDotted(index){
-  //   // console.log(index);
-  //   //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
-  //   //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
-  //   let n = index-this.state.nowScroll;
-  //   clearInterval(this.interval)
-  //   this.scroll(n)
-  //   this.goPlay()
-  // }
+  - //左右的点击事件
+  - handleClick(which){
+  -   //this.setState({nowScroll:this.state.nowScroll+num})
+  -   //先清掉定时器=>然后执行 scroll() => 最后打开定时器
+  -   clearInterval(this.interval)
+  -   this.scroll(which)
+  -   this.goPlay()
+  - }
+  - //一排按钮点击事件
+  - handleDotted(index){
+  -   // console.log(index);
+  -   //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
+  -   //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
+  -   let n = index-this.state.nowScroll;
+  -   clearInterval(this.interval)
+  -   this.scroll(n)
+  -   this.goPlay()
+  - }
 
   handleClick(index){
     let n = index-this.state.nowScroll;
