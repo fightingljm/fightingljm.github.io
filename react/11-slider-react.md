@@ -1,5 +1,5 @@
 ---
-title:  React 轮播图
+title: React轮播图
 ---
 
 看入口文件 index.js
