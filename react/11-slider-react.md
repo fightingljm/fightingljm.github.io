@@ -4,7 +4,7 @@ title:  React 轮播图
 
 - index.js
 
-```
+```js
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -30,7 +30,7 @@ ReactDOM.render(
 
 - Slider.js
 
-```
+```js
 import React from 'react';
 
 class Slider extends React.Component {
@@ -51,24 +51,24 @@ class Slider extends React.Component {
     return this.setState({nowScroll:next})//正常轮播
   }
 
-   //左右的点击事件
-   handleClick(which){
-     //this.setState({nowScroll:this.state.nowScroll+num})
-     //先清掉定时器=>然后执行 scroll() => 最后打开定时器
-     clearInterval(this.interval)
-     this.scroll(which)
-     this.goPlay()
-   }
-   //一排按钮点击事件
-   handleDotted(index){
-     // console.log(index);
-     //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
-     //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
-     let n = index-this.state.nowScroll;
-     clearInterval(this.interval)
-     this.scroll(n)
-     this.goPlay()
-   }
+  // //左右的点击事件
+  // handleClick(which){
+  //   //this.setState({nowScroll:this.state.nowScroll+num})
+  //   //先清掉定时器=>然后执行 scroll() => 最后打开定时器
+  //   clearInterval(this.interval)
+  //   this.scroll(which)
+  //   this.goPlay()
+  // }
+  // //一排按钮点击事件
+  // handleDotted(index){
+  //   // console.log(index);
+  //   //这里的思路是让点击的 index 减去现在所处位置的 nowScroll ,求得 ul 需要动的 left
+  //   //同样先清掉定时器=>然后执行 scroll() => 最后打开定时器,所以有了下面 handlelick 的代码优化
+  //   let n = index-this.state.nowScroll;
+  //   clearInterval(this.interval)
+  //   this.scroll(n)
+  //   this.goPlay()
+  // }
 
   handleClick(index){
     let n = index-this.state.nowScroll;
@@ -119,4 +119,70 @@ class Slider extends React.Component {
 }
 export default Slider;
 
+```
+
+- main.css
+
+```css
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.slider-wrap{
+  width: 100%;
+  height: 50vh;
+  background-color: #ccc;
+  overflow: hidden;
+  position: relative;
+}
+.slider-wrap ul{
+  list-style: none;
+  height: 100%;
+  position: relative;
+  transition: left 1s ease;
+}
+.slider-wrap ul li{
+  float: left;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.arrow{
+  position: absolute;
+  width: 30px;
+  height: 50vh;
+  background-color: rgba(0,0,0,0);
+  line-height: 100%;
+  vertical-align: middle;
+  font-size: 24px;
+  top: 0;
+  border: none;
+  color: #333;
+  font-weight: bolder;
+  outline: none;
+  cursor: pointer;
+}
+.arrow:hover{
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+}
+.right{
+  right: 0;
+}
+.dotted{
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+.dotted span{
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
 ```
