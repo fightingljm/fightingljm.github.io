@@ -4,7 +4,7 @@ title:  React 轮播图
 
 ### index.js
 
-```js
+```
 //index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -111,7 +111,7 @@ export default Slider;
 
 ### 最后导入 css 即可
 
-```css
+```
 *{
   margin: 0;
   padding: 0;
