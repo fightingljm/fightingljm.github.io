@@ -2,10 +2,10 @@
 title: TodoMVC Demo
 ---
 
-[TodoMVC 官网实例](http://todomvc.com/examples/react/#/)
-[React 官网 An Application](https://facebook.github.io/react/)
+- [TodoMVC 官网实例](http://todomvc.com/examples/react/#/)
+- [React 官网 An Application](https://facebook.github.io/react/)
 
-在 index.html 中引入了 Bootstrap [参见 Bootstrap 官网](http://getbootstrap.com/)
+- 在 index.html 中引入了 Bootstrap [参见 Bootstrap 官网](http://getbootstrap.com/)
 
 ```html
 <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
