@@ -11,9 +11,9 @@ title: TodoMVC Demo
 <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 ```
 
-首先我们把 App.js 作为上半部分标题和表单的组件;
-把 TodoList.js 作为添加的一堆列表的组件;
-把 TodoControl.js 作为筛选完成未完成的列表的组件;
+- 首先我们把 App.js 作为上半部分标题和表单的组件;
+- 把 TodoList.js 作为添加的一堆列表的组件;
+- 把 TodoControl.js 作为筛选完成未完成的列表的组件;
 
 ```js
 //App.js
@@ -115,18 +115,18 @@ class TodoList extends React.Component {
     //   <li key={Math.random()}>
     //     <input type='checkbox' className='pull-left' defaultChecked={item.completed} onChange={()=> this.props.handleCompleted(index)}></input>
     //
-    //     <span style={{textDecoration: item.completed ? 'line-through' : 'none',color: item.completed ? '#ccc' : '#000'} }>{item.text}</span>
+    //     <span style={{textDecoration: item.completed ? 'line-through' : 'none',color: item.completed ? '#ccc' : '#000'}}>{item.text}</span>
     //
-    //     <span className="glyphicon glyphicon-remove-circle pull-right" aria-hidden="true" style={{color:'red'} } onClick={()=> this.props.handleRemove(index)}></span>
+    //     <span className="glyphicon glyphicon-remove-circle pull-right" aria-hidden="true" style={{color:'red'}} onClick={()=> this.props.handleRemove(index)}></span>
     //
     //   </li>)
     let list = this.props.data.map(item=>
       <li key={item.id}>
         <input type='checkbox' className='pull-left' defaultChecked={item.completed} onChange={()=> this.props.handleCompleted(item.id)}></input>
 
-        <span style={{textDecoration: item.completed ? 'line-through' : 'none',color: item.completed ? '#ccc' : '#000'} }>{item.text}</span>
+        <span style={{textDecoration: item.completed ? 'line-through' : 'none',color: item.completed ? '#ccc' : '#000'}}>{item.text}</span>
 
-        <span className="glyphicon glyphicon-remove-circle pull-right" aria-hidden="true" style={{color:'red'} } onClick={()=> this.props.handleRemove(item.id)}></span>
+        <span className="glyphicon glyphicon-remove-circle pull-right" aria-hidden="true" style={{color:'red'}} onClick={()=> this.props.handleRemove(item.id)}></span>
 
       </li>)
     return(
