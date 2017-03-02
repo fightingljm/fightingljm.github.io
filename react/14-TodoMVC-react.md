@@ -2,6 +2,8 @@
 title: TodoMVC Demo
 ---
 
+### TodoMVC
+
 - [TodoMVC 官网实例](http://todomvc.com/examples/react/#/)
 - [React 官网 An Application](https://facebook.github.io/react/)
 
@@ -67,7 +69,7 @@ class Test extends React.Component {
     if(localStorage.todos){
       this.setState({data:JSON.parse(window.localStorage.getItem('todos') || '[]')})
     }
-  }//localStorage HTML5 本地存储
+  }//localStorage HTML5 本地存储 以及 JSON 格式会在本节末尾详细介绍
   render(){
     localStorage.setItem('todos',JSON.stringify(this.state.data))
     let styles = {
@@ -206,4 +208,18 @@ localstorage存储对象分为两种：
 两者区别就是一个作为临时保存，一个长期保存。
 ```
 
-我们用 localStorage.setItem() 和 localStorage.getItem() 方法来设值和取值,如 Todomvc 代码所示
+我们用 localStorage.setItem() 和 localStorage.getItem() 方法来设值和取值,如上 Todomvc 代码所示
+
+### JSON
+
+还是看代码体会一下就好了
+
+```js
+  let arr = {name:'liu',age:22};
+  let json = JSON.stringify(arr);
+  console.log(json)//{"name":"liu","age":22}
+
+  let jsonObj = JSON.parse(json)
+  console.log(jsonObj)//Object age: 22 name: "liu" __proto__: Object
+  console.log(jsonObj.name)//liu
+```
