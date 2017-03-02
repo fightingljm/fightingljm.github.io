@@ -26,11 +26,7 @@ class Test extends React.Component {
     super();
     this.state={
       inputValue:'',
-      data:[
-        {text:'aaa',completed:true,id:1},
-        {text:'bbb',completed:false,id:2},
-        {text:'ccc',completed:false,id:3}
-      ],
+      data:[],
       visible:'All'
     }
   }
@@ -67,7 +63,13 @@ class Test extends React.Component {
   handleFilter(visible){
     this.setState({visible:visible})
   }
+  componentWillMount(){
+    if(localStorage.todos){
+      this.setState({data:JSON.parse(window.localStorage.getItem('todos') || '[]')})
+    }
+  }//localStorage HTML5 本地存储
   render(){
+    localStorage.setItem('todos',JSON.stringify(this.state.data))
     let styles = {
       root:{
         maxWidth:'270px',
@@ -167,3 +169,41 @@ class TodoControl extends React.Component {
 export default TodoControl;
 
 ```
+
+### localStorage
+
+这里一定要好好扯扯这个 `localStorage`
+
+首先来说,他是对 cookie 的优化,那么 cookie 是什么呢
+
+- cookie 和 localStorage 一样是用来缓存信息的,以避免在 url 上面传递参数,但是他回带来一些问题
+
+```
+① cookie大小限制在4k左右，不适合存业务数据
+② cookie每次随HTTP事务一起发送，浪费带宽
+```
+
+- localStorage 方便了用户在客户端存储数据,并且不会随着HTTP传输
+
+```
+① localstorage大小限制在500万字符左右，各个浏览器不一致
+② localstorage在隐私模式下不可读取
+③ localstorage本质是在读写文件，数据多的话会比较卡（firefox会一次性将数据导入内存，想想就觉得吓人啊）
+④ localstorage不能被爬虫爬取，不要用它完全取代URL传参
+```
+
+基本了解了 localStorage 相比 cookie 的优点,那现在就来关注以下使用 localStorage 的正确姿势
+
+基础知识
+
+```
+localstorage存储对象分为两种：
+
+① sessionStorage： session即会话的意思，在这里的session是指用户浏览某个网站时，从进入网站到关闭网站这个时间段，session对象的有效期就只有这么长。
+
+② localStorage： 将数据保存在客户端硬件设备上，不管它是什么，意思就是下次打开计算机时候数据还在。
+
+两者区别就是一个作为临时保存，一个长期保存。
+```
+
+我们用 localStorage.setItem() 和 localStorage.getItem() 方法来设值和取值,如 Todomvc 代码所示
