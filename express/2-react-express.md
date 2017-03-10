@@ -270,3 +270,103 @@ Access-Control-Allow-Origin: *
 ```
 
 有了这个设置，所有的第三方网站都可以访问服务器上的资源了。
+
+### 跨域请求的解决方案
+
+解决方案采用： https://github.com/expressjs/cors
+
+cors (Cross Origin Resource Share --跨域请求资源分享) ，安装了这个包就可以完成 `Access-Control-Allow-Origin: *`这个设置了。
+
+首先我们来瞅瞅在没有装包之前, Access-Control-Allow-Origin 的设置
+
+```
+$ curl -I http://localhost:3000/
+```
+
+curl 的 -I 选项用来专门拿到服务器返回的 header 。命令返回的信息，就是服务器端被请求资源的的 header 。
+
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 11
+ETag: W/"b-sQqNsWTgdUEFt6mb5y4/5Q"
+Date: Thu, 08 Dec 2016 01:51:44 GMT
+Connection: keep-alive
+```
+
+上面是返回的结果,很明显是没有 Access-Control-Allow-Origin 这一项的。即为 null ,所以不能实现跨域资源共享.
+
+下面我们就来安装 cors 包解决这个问题,[点我](https://www.npmjs.com/package/cors) 可以看到装包命令如下：
+
+```
+$ npm install --save cors
+```
+
+>注意：这个包要安装到后台代码中。
+
+然后按照文档，在后台代码 index.js 添加下面两行代码：
+
+
+
+```js
+const express = require('express');
+const app = express();
+
++ const cors = require('cors')
++ app.use(cors());
+
+app.get('/username',function (req,res) {
+  res.send({username:'fightingljm'})
+})
+app.listen(3000,function () {
+  console.log('running on port 3000...');
+})
+```
+
+保证代码是运行状态,再用 `curl -I http://localhost:3000/username` 看看输出：
+
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: text/html; charset=utf-8
+Content-Length: 11
+ETag: W/"b-sQqNsWTgdUEFt6mb5y4/5Q"
+Date: Thu, 08 Dec 2016 02:17:23 GMT
+Connection: keep-alive
+```
+
+快看,是 `Access-Control-Allow-Origin: *` 。
+
+浏览器中，刷新一下，可以看到后台返回的 response 数据了。错误没有了。同时我们发现在后台输出的 object 下的 data 下的 username 正是存储了我们的用户名.
+
+那下一步就让我们在浏览器把他整出来...
+
+### 调整接口数据格式
+
+修改前台代码，调整 componentWillMount ，如下：
+
+```
+componentWillMount() {
+  axios.get('http://localhost:3000/username').then(function(response){
+      return console.log(response.data.username);
+  })
+}
+```
+
+这样，前台浏览器的 console 中，就可以看到返回的数据 `fightingljm`
+
+进一步靠近我们的目标,在浏览器显示,下面进一步调整 componentWillMount 如下：
+
+```
+componentWillMount() {
+  axios.get('http://localhost:3000/username').then((response) => {
+      this.setState({username: response.data.username});
+  })
+}
+```
+
+>注意:以上一定要写成箭头函数,否则 this 找不到
+
+至此，前台页面上成功显示出了，后台的数据。这样，一个前后端分离架构，通过 API 通信的应用，我们就完成了。
