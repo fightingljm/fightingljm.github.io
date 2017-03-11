@@ -113,22 +113,26 @@ index.js 如下
 ```js
 const express =  require('express');
 const app = express();
+
+//解决跨域请求
 const cors = require('cors');
 app.use(cors());
+
+//使用 Mongoose 连接 JS 和 MongoDB
 const mongoose = require('mongoose');
-const User = require('./models/user');
-
-
-mongoose.connect('mongodb://localhost:27017/digicity');
 // 执行此行代码之前，要保证 mongodb 数据库已经运行了，而且运行在 27017 端口
+mongoose.connect('mongodb://localhost:27017/express-react-demo');
+const User = require('./models/user')
 
-var db = mongoose.connection;
+let db = mongoose.connection;
 db.on('error', console.log);
 db.once('open', function() {
-   let user = new User({username: 'inCode', email: 'inCode@incode.com'});
-   user.save(function(err){
-     if(err) console.log(err);
-   })
+  let user = new User({username: 'fightingljm', email: '132@qq.com'})
+  user.save(function () {
+    if(err){
+      console.log(err)
+    }
+  })
   console.log('success!')
 });
 
