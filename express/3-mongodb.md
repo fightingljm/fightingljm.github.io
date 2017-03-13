@@ -15,6 +15,7 @@ title: MongoDB 数据库
 - [MongoDB 的官网](https://www.mongodb.com/)
 - [MongoDB 中文社区](http://www.mongoing.com/)
 - [MongoDB 中文网](http://www.mongodb.org.cn/)
+- [更多数据库操作参见 NEWMING](http://newming.coding.me/myidoc/html/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb.html)
 
 数据库里各种关系:
 
