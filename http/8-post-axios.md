@@ -33,7 +33,7 @@ $ curl -H "Content-Type: application/json" -X POST -d '{"username":"happypeter"}
 
 react 代码如下：
 
-index.js
+方法一: index.js(用 input 的 onChange 方法)
 
 ```js
 import React from 'react';
@@ -71,6 +71,38 @@ class App extends React.Component {
         onSubmit={this.handleSubmit.bind(this)} ref='form'>
           <input type='text' value={this.state.inputValue}
             onChange={this.handleChange.bind(this)}/>
+          <button>提交</button>
+        </form>
+      </div>
+    )
+  }
+}
+
+export default App;
+```
+
+方法二: index.js(用 react 的 refs 机制)
+
+```js
+import React from 'react';
+import axios from 'axios';
+
+class App extends React.Component {
+  handleSubmit(e){
+    e.preventDefault();
+    let username = this.refs.username.value;
+    axios.post('http://tiger.haoduoshipin.com/login',{username})
+      .then(respons => {
+        console.log(respons.data.msg);
+      })
+  }
+  render(){
+    return(
+      <div>
+        Test API
+        <form action='http://tiger.haoduoshipin.com/login' method='POST'
+          onSubmit={this.handleSubmit.bind(this)} >
+          <input ref='username'/>
           <button>提交</button>
         </form>
       </div>
