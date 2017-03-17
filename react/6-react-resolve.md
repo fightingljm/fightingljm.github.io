@@ -7,7 +7,8 @@ title: resolve 解析
 resolve下常用的是extension和alias字段的配置：
 
 extension 不用在require或是import的时候加文件后缀
-```js
+
+```diff
 // webpack.config.js
 module.exports = {
   entry:'./src/index.js',
@@ -39,7 +40,7 @@ module.exports = {
   }
 }
 ```
-```js
+```diff
 - var component = require('./component.js');
 + var component = require('./component');
 ```
