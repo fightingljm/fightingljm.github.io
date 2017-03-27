@@ -25,3 +25,9 @@ title: 处理两类数据
 即便现在可以拿到 id ,但是当 store 变化的时候没有把id传回去,换句话说,reducer没有改变store的值
 
 参考 [ADD_COMMENT](https://github.com/fightingljm/redux-demo/commit/e9073ef8addd4a6e2c0930ca627e8f90cd506ad2)
+
+### 第三个小目标：添加点赞功能
+
+- 添加样式：[love style](https://github.com/fightingljm/redux-demo/commit/11a6811accc879c09843b321993edde64a8a9175)
+- 从 store 中读取数据 [read like number from store](https://github.com/fightingljm/redux-demo/commit/70ad6b03884f8d8cd7c7213063954f9cafe21c7a)
+- 添加 reducer  [INCREMENT_LIKES](https://github.com/fightingljm/redux-demo/commit/9542c253e6bbcb09de10c8eb4d4bbfc833dc42de)
