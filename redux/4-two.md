@@ -31,3 +31,9 @@ title: 处理两类数据
 - 添加样式：[love style](https://github.com/fightingljm/redux-demo/commit/11a6811accc879c09843b321993edde64a8a9175)
 - 从 store 中读取数据 [read like number from store](https://github.com/fightingljm/redux-demo/commit/70ad6b03884f8d8cd7c7213063954f9cafe21c7a)
 - 添加 reducer  [INCREMENT_LIKES](https://github.com/fightingljm/redux-demo/commit/9542c253e6bbcb09de10c8eb4d4bbfc833dc42de)
+
+### 第四个小目标：完成首页列表
+
+- PostBody 中添加 title [show title](https://github.com/fightingljm/redux-demo/commit/e65bc538ad633832f904ea78b14ecd4752ee0554)
+- 首页组件从 store 中读取数据 [read post data from store](https://github.com/fightingljm/redux-demo/commit/94baf2d9565e0041f8d96d048770d35f0806560a)
+- 首页展示博客列表 [add postList to HOME](https://github.com/fightingljm/redux-demo/commit/cd1556a67573ad248a2da81876d12ff5e06f26cd)
