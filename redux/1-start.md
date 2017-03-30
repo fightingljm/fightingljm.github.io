@@ -38,6 +38,13 @@ Redux 的创造者 Dan Abramov 说过一句话
 
 总之，不要把 Redux 当作万灵丹，如果你的应用没那么复杂，就没必要用它。另一方面，Redux 只是 Web 架构的一种解决方案，也可以选择其他方案。
 
+*Redux 基本思想*
+
+> 组件不管理自己的 state
+
+用下一节讲到的三大概念来说就是
+
+> 组件发出 `action` , `action` 出发 `reducer` , `reducer` 修改 `store` 状态树
 
 ### React-webpack 环境搭建
 
