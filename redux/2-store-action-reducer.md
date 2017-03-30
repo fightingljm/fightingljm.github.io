@@ -2,6 +2,16 @@
 title: Store Action Reducer
 ---
 
+*Redux 基本思想*
+
+> 组件不管理自己的 state
+
+*替代方式*
+
+> 组件发出 `action` ，action 触发 `reducer` ，reducer 修改 `store` 状态树。
+
+由于各个组件，都通过 **react-redux 库的 Provider 和 connect 接口** 订阅了 store 中的数据，所以，只要 store 数据变化了，那么组件也是可以自动刷新的。
+
 推荐 **阮一峰** ...
 
 - [Redux 入门教程（一）：基本用法](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
