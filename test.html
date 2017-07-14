@@ -7,10 +7,12 @@
         function childFunction() {  
             alert("我是子页面,\n我需要使用 Iframe Name 调用！");  
         }  
+        con
     </script>  
 </head>  
 <body style="margin: auto; background-color: Gray; color: Red;">  
-    <input type="button" value="调用父页面的脚本" onclick="javascript:window.parent.fatherFunction();" /><br />  
+<!--     <input type="button" value="调用父页面的脚本" onclick="javascript:window.parent.fatherFunction();" /><br />   -->
+        <input type="button" value="调用父页面的脚本" onclick="javascript:console.log(window.parent);" /><br />  
     <div id="childPage">  
         我是子页面,我需要使用 Iframe Name 调用！</div>  
 </body>  
